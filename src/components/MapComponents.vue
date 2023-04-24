@@ -50,6 +50,9 @@ export default ({
         stations() {
             return stations.value;
         }
+    },
+    data(){
+
     }
 })
 
@@ -64,16 +67,22 @@ export default ({
               :maxZoom="19"
       >
       </l-tile-layer>
+
+      <l-control-layers></l-control-layers>
+
       <l-wms-tile-layer
-              :url="'https://geo.weather.gc.ca/geomet/'"
-              :layers="'HRDPS.CONTINENTAL_UU'"
-              :tiled="true"
-              :transparent="false"
-              :opacity="0.5"
-              :format="'image/png'"
+          layer-type="overlay"
+          :name="'Wind'"
+          :url="'https://geo.weather.gc.ca/geomet/'"
+          :layers="'HRDPS.CONTINENTAL_UU'"
+          :tiled="true"
+          :transparent="false"
+          :visible="false"
+          :opacity="0.5"
+          :format="'image/png'"
       >
       </l-wms-tile-layer>
-      <l-wms-tile-layer
+      <!--<l-wms-tile-layer
               :url="'https://cartes.inspq.qc.ca/mapserver/general/canopee.map/'"
               :layers="'canopee_rmr_quebec_2022'"
               :tiled="true"
@@ -85,16 +94,21 @@ export default ({
               :width="1920"
               :styles="'Toute la canopée'"
       >
-      </l-wms-tile-layer>
-      <!--<l-wms-tile-layer
-              :url="'https://geo.weather.gc.ca/geomet/'"
-              :layers="'RAQDPS-FW.SFC_PM2.5'"
-              :tiled="true"
-              :transparent="false"
-              :opacity="0.5"
-              :format="'image/png'"
-      >
       </l-wms-tile-layer> -->
+      <l-wms-tile-layer
+          layer-type="overlay"
+          :name="'PM2.5'"
+          :url="'https://geo.weather.gc.ca/geomet/'"
+          :layers="'RAQDPS-FW.SFC_PM2.5'"
+          :tiled="true"
+          :visible="false"
+          :transparent="false"
+          :opacity="0.5"
+          :format="'image/png'"
+      >
+      </l-wms-tile-layer>
+
+
       <l-marker
               v-for="station in stations"
               :key="station.id"
